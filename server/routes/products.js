@@ -8,12 +8,11 @@ const {
 } = require('../controller/exampleController');
 
 const router = Router();
-const id = '1';
 
 router.get('/', getAllProducts);
-router.get(`/${id}`, getProduct);
+router.get('/productId', getProduct);
 router.post('/', createProduct);
-router.put(`/${id}`, updateProduct);
-router.delete(`/${id}`, deleteProduct);
+router.put('/productId', updateProduct);
+router.delete('/productId', deleteProduct);
 
 module.exports = router;

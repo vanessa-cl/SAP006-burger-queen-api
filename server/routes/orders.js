@@ -8,12 +8,11 @@ const {
 } = require('../controller/exampleController');
 
 const router = Router();
-const id = '1';
 
 router.get('/', getAllOrders);
-router.get(`/${id}`, getOrder);
+router.get('/:orderId', getOrder);
 router.post('/', createOrder);
-router.put(`/${id}`, updateOrder);
-router.delete(`/${id}`, deleteOrder);
+router.put('/:orderId', updateOrder);
+router.delete('/:orderId', deleteOrder);
 
 module.exports = router;
