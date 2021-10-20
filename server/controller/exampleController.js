@@ -1,12 +1,14 @@
 // aqui vai o código que acessa o banco de dados
 
 const getAllUsers = (req, res) => {
-  res.send('todos os usuários aqui');
+
+  res.status(200).send('todos os usuários aqui');
 };
 
 const getUser = (req, res) => {
+
   res.send('um único usuário aqui');
-;}
+}
 
 const createUser = (req, res) => {
   res.send('criar usuário aqui');
@@ -60,10 +62,10 @@ const deleteOrder = (req, res) => {
   res.send('deletar pedido aqui');
 }
 
-module.exports = { 
-  getAllUsers, 
-  getUser, 
-  createUser, 
+module.exports = {
+  getAllUsers,
+  getUser,
+  createUser,
   updateUser,
   deleteUser,
   getAllProducts,

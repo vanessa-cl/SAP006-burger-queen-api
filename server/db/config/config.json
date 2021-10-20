@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "postgres",
+    "password": "987654",
+    "database": "fight_club_burger",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "dialectOptions": {
