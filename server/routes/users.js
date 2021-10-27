@@ -5,7 +5,7 @@ const {
   createUser,
   updateUser,
   deleteUser,
-} = require('../controller/exampleController');
+} = require('../controller/usersController');
 
 const router = Router();
 

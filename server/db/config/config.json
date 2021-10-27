@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "987654",
-    "database": "fight_club_burger",
-    "host": "127.0.0.1",
+    "username": "uolzxiwvjxmowk",
+    "password": "98c4dfba43eb033630090c3c26c77662e36b3436e93154541ba3031148ae6f09",
+    "database": "d9r16cip0dbc5b",
+    "host": "ec2-44-198-215-235.compute-1.amazonaws.com",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
