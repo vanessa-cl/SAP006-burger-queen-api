@@ -18,23 +18,32 @@ const getUser = (req, res) => {
   .catch((error) => res.status(400).send(error))
 }
 
-const createUser = (req, res) => {
-  const searchUser = Users.create({
-    content: req.body.name,
-    todoId: req.params.todoId
+const updateUser = async (req, res) => {
+  const userId = req.params.userId;
+  const { name, role } = req.body;
+  const createdUser = await Users.findOne({
+    where: {
+      id: userId
+    }
   })
-  console.log(searchUser)
-    // .then(todoItem => res.status(201).send(todoItem))
-    // .catch(error => res.status(400).send(error));
-}
+    .then((user) => user)
 
-const updateUser = (req, res) => {
-  res.send('atualizar usuário aqui');
-}
-
-const deleteUser = (req, res) => {
-  res.send('deletar usuário aqui');
-}
+  if (createdUser === null) {
+    return res.status(404).send("User not found");
+  } else if (createdUser.name === name && createdUser.role === role || !name && !role) {
+    return res.status(400).send("Missing required or new data");
+  } else {
+    return Users.update({
+      name: name,
+      role: role
+    }, {
+      where: {
+        id: userId
+      }
+    }).then((user) => {
+      return res.status(200).send(user);
+    })
+  }
 
 module.exports = {
   getAllUsers,
