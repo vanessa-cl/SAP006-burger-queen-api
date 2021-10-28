@@ -50,7 +50,7 @@ const updateUser = async (req, res) => {
     }
   })
     .then((user) => user)
-  console.log(createdUser)
+
   if (createdUser === null) {
     return res.status(404).send("User not found");
   } else if (createdUser.name === name && createdUser.role === role || !name && !role) {
