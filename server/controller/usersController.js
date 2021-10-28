@@ -12,8 +12,7 @@ const getUser = async (req, res) => {
     where: {
       id: req.params.userId
     }
-  })
-    .then((user) => res.status(200).send(user))
+  }).then((user) => res.status(200).send(user))
     .catch((error) => res.status(400).send(error))
 }
 
@@ -36,8 +35,7 @@ const createUser = async (req, res) => {
       password: password,
       role: role,
       restaurant: restaurant
-    })
-      .then((user) => res.status(200).send(user))
+    }).then((user) => res.status(200).send(user))
   }
 }
 
@@ -48,8 +46,7 @@ const updateUser = async (req, res) => {
     where: {
       id: userId
     }
-  })
-    .then((user) => user)
+  }).then((user) => user)
 
   if (createdUser === null) {
     return res.status(404).send("User not found");
@@ -75,8 +72,7 @@ const deleteUser = async (req, res) => {
     where: {
       id: userId
     }
-  })
-    .then((user) => user)
+  }).then((user) => user)
 
   if (createdUser === null) {
     return res.status(404).send("User not found");
