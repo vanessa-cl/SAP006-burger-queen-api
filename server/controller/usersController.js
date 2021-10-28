@@ -4,17 +4,26 @@ const getAllUsers = async (req, res) => {
   return Users.findAll()
     .then((users) => {
       res.status(200).send(users)
-    })
+    });
 };
 
 const getUser = async (req, res) => {
-  return Users.findOne({
+  const userId = req.params.userId;
+  const createdUser = await Users.findOne({
     where: {
-      id: req.params.userId
+      id: userId
     }
-  }).then((user) => res.status(200).send(user))
-    .catch((error) => res.status(400).send(error))
-}
+  });
+  
+  if (!createdUser) {
+    return res.status(404).send({
+      code: 404,
+      message: "User not found"
+    })
+  } else {
+    return res.status(200).send(createdUser)
+  }
+};
 
 const createUser = async (req, res) => {
   const { name, email, password, role, restaurant } = req.body;
@@ -22,12 +31,18 @@ const createUser = async (req, res) => {
     where: {
       email: email
     }
-  })
+  });
 
   if (!name || !email || !password || !role || !restaurant) {
-    return res.status(400).send("Missing required data");
+    return res.status(400).send({
+      code: 400,
+      message: "Missing required data"
+    });
   } else if (createdUser !== null) {
-    return res.status(403).send("Email already in use");
+    return res.status(403).send({
+      code: 403,
+      message: "Email already in use"
+    });
   } else {
     return await Users.create({
       name: name,
@@ -37,7 +52,7 @@ const createUser = async (req, res) => {
       restaurant: restaurant
     }).then((user) => res.status(200).send(user))
   }
-}
+};
 
 const updateUser = async (req, res) => {
   const userId = req.params.userId;
@@ -46,12 +61,18 @@ const updateUser = async (req, res) => {
     where: {
       id: userId
     }
-  }).then((user) => user)
+  })
 
   if (createdUser === null) {
-    return res.status(404).send("User not found");
+    return res.status(404).send({
+      code: 404,
+      message: "User not found"
+    });
   } else if (createdUser.name === name && createdUser.role === role || !name && !role) {
-    return res.status(400).send("Missing required or new data");
+    return res.status(400).send({
+      code: 400,
+      message: "Missing required or new data"
+    });
   } else {
     return Users.update({
       name: name,
@@ -72,10 +93,13 @@ const deleteUser = async (req, res) => {
     where: {
       id: userId
     }
-  }).then((user) => user)
+  })
 
   if (createdUser === null) {
-    return res.status(404).send("User not found");
+    return res.status(404).send({
+      code: 404,
+      message: "User not found"
+    });
   } else {
     createdUser.destroy();
     return res.status(200).send(createdUser)
